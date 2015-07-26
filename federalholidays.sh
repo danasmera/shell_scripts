@@ -13,9 +13,16 @@ exit 1
 }
 
 # we will need the year as argument in YYYY format
-[[ $ARGC -ne 1 ]] &&  Usage
+#[[ $ARGC -eq 0 ]] &&  Usage
 
-myyear="$1"
+if [ $ARGC -gt 0 ]; then
+  if [ "$1" = "-h" -o "$1" = "--help" ]; then
+    Usage
+  fi
+fi
+
+current_year=$(date +'%Y')
+myyear=${1:-"$current_year"}
 dformat='+%A, %B %d, %Y'
 
 [[ "$myyear" -ge 2038 ]] && [[ "$ARCH" = "i686" ]] && echo 'Year 2038 problem : http://en.wikipedia.org/wiki/Year_2038_problem ' && exit 1
@@ -90,4 +97,3 @@ November 11 - Veteran's Day.
 Fourth Thursday of November - Thanksgiving
 December 25 - Christmas Day
 federal_holidays_comment
-
