@@ -30,6 +30,9 @@ dformat='+%A, %B %d, %Y'
 #We will ignore any year below 1902
 [[ "$myyear" -lt 1902 ]] && [[ "$ARCH" = "i686" ]] && exit 1
 
+#Year has to be greater than 1789, the year the Federal government of the United states was founded.
+[[ "$myyear" -lt 1789 ]] && echo 'Year has to be 1789 or above.' && exit 1
+
 ##Function to get the nth day week of the month, for instance, Third Monday of March.
 
 function nth_xday_of_month
